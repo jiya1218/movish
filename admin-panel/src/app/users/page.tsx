@@ -65,10 +65,8 @@ export default function UsersPage() {
       await fetchApi('/api/v1/users', {
         method: 'POST',
         body: JSON.stringify({
-          fullName: createForm.fullName,
-          email: createForm.email,
+          ...createForm,
           role: selectedRole?.name || 'Executive',
-          ...createForm
         })
       })
       setShowCreateModal(false)
