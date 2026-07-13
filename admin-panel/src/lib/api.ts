@@ -1756,7 +1756,7 @@ export async function fetchApi(path: string, options: RequestInit = {}, retries 
         const found = db.leads.find((l: any) => l.id === leadId);
         if (found) {
           // Clone the lead object to avoid mutating DB reference
-          const leadObj = { ...found };
+          const leadObj: any = { ...found };
           const clientNameNormalized = (leadObj.clientName || '').toLowerCase();
 
           // 1. Policies
