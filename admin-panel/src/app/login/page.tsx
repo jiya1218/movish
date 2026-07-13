@@ -17,9 +17,10 @@ export default function LoginPage() {
     setError(null)
 
     try {
-      if (email === 'admin@movish.com') {
+      const mockEmails = ['admin@movish.com', 'hr@movish.com', 'finance@movish.com', 'employee@movish.com']
+      if (mockEmails.includes(email.toLowerCase().trim())) {
         localStorage.setItem('movish_mock_session', 'true')
-        localStorage.setItem('movish_mock_email', email)
+        localStorage.setItem('movish_mock_email', email.toLowerCase().trim())
         window.location.href = '/'
         return
       }

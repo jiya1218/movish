@@ -183,13 +183,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   async function login(email: string, password: string) {
-    if (email.trim() === 'admin@movish.com') {
+    const cleanEmail = email.trim().toLowerCase();
+    const mockEmails = ['admin@movish.com', 'hr@movish.com', 'finance@movish.com', 'employee@movish.com'];
+    if (mockEmails.includes(cleanEmail)) {
       const storage = Platform.OS === 'web' ? (typeof window !== 'undefined' ? window.localStorage : undefined) : AsyncStorage;
       await storage?.setItem('movish_mock_session', 'true');
-      await storage?.setItem('movish_mock_email', email);
-      setUser({
+      await storage?.setItem('movish_mock_email', cleanEmail);
+      
+      let userDetails = {
         id: 'mock-user-1',
-        email: 'admin@movish.com',
+        email: cleanEmail,
         full_name: 'Rajesh Sharma',
         name: 'Rajesh Sharma',
         phone: '+91 98765 43210',
@@ -197,7 +200,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         role_id: 'mock-role-1',
         permissions: ['*'],
         is_active: true,
-      });
+      };
+
+      if (cleanEmail === 'hr@movish.com') {
+        userDetails.full_name = 'Neha Patel';
+        userDetails.name = 'Neha Patel';
+        userDetails.role = 'HR Manager';
+      } else if (cleanEmail === 'finance@movish.com') {
+        userDetails.full_name = 'Amit Mehta';
+        userDetails.name = 'Amit Mehta';
+        userDetails.role = 'Finance Manager';
+      } else if (cleanEmail === 'admin@movish.com') {
+        userDetails.full_name = 'Rajesh Sharma';
+        userDetails.name = 'Rajesh Sharma';
+        userDetails.role = 'Admin';
+      }
+
+      setUser(userDetails);
       return;
     }
     const { error } = await supabase.auth.signInWithPassword({ email, password });
