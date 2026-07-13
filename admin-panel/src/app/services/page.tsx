@@ -491,52 +491,54 @@ export default function ServicesPage() {
               </div>
 
               {/* SPECIAL INSPECTION MEDIA SECTION (DEMO ASSETS FOR ALL VEHICLES) */}
-              <div className="bg-blue-50/40 border border-blue-100 rounded-3xl p-6 space-y-4 mb-4">
-                <div className="flex items-center gap-2 text-[#084D8C]">
-                  <Activity size={20} className="animate-pulse" />
-                  <h5 className="font-extrabold text-sm uppercase tracking-wider">
-                    {selectedCard.vehicleNumber === "GJ15AX3940" 
-                      ? "Sanand Municipal Inspection Report" 
-                      : "Quality Inspection Report (Sample)"}
-                  </h5>
-                </div>
-                
-                {/* Photo Grid */}
-                <div>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Images</p>
-                  <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin">
-                    {[...Array(13)].map((_, i) => (
-                      <div key={i} className="w-40 h-28 shrink-0 rounded-xl overflow-hidden border border-gray-200 relative group cursor-pointer hover:border-[#084D8C] transition-all">
-                        <img 
-                          src={`/extracted_ppt/ppt/media/image${i+1}.jpeg`} 
-                          alt={`Slide Photo ${i+1}`}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-all duration-300"
-                          onClick={() => window.open(`/extracted_ppt/ppt/media/image${i+1}.jpeg`, '_blank')}
-                        />
-                        <span className="absolute bottom-1 right-1 bg-black/60 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
-                          Slide {i+1}
-                        </span>
-                      </div>
-                    ))}
+              {[2, 8, 9, 10].includes(activeStageTab) && (
+                <div className="bg-blue-50/40 border border-blue-100 rounded-3xl p-6 space-y-4 mb-4">
+                  <div className="flex items-center gap-2 text-[#084D8C]">
+                    <Activity size={20} className="animate-pulse" />
+                    <h5 className="font-extrabold text-sm uppercase tracking-wider">
+                      {selectedCard.vehicleNumber === "GJ15AX3940" 
+                        ? "Sanand Municipal Inspection Report" 
+                        : "Quality Inspection Report (Sample)"}
+                    </h5>
                   </div>
-                </div>
+                  
+                  {/* Photo Grid */}
+                  <div>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Images</p>
+                    <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin">
+                      {[...Array(13)].map((_, i) => (
+                        <div key={i} className="w-40 h-28 shrink-0 rounded-xl overflow-hidden border border-gray-200 relative group cursor-pointer hover:border-[#084D8C] transition-all">
+                          <img 
+                            src={`/extracted_ppt/ppt/media/image${i+1}.jpeg`} 
+                            alt={`Slide Photo ${i+1}`}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-all duration-300"
+                            onClick={() => window.open(`/extracted_ppt/ppt/media/image${i+1}.jpeg`, '_blank')}
+                          />
+                          <span className="absolute bottom-1 right-1 bg-black/60 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
+                            Slide {i+1}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-                {/* Video Playback */}
-                <div className="pt-2">
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Final Quality Inspection Video</p>
-                  <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-inner bg-black aspect-video max-w-lg">
-                    <video 
-                      controls 
-                      className="w-full h-full object-contain"
-                      poster="/extracted_ppt/ppt/media/image1.jpeg"
-                    >
-                      <source src="/Inspection final.mp4" type="video/mp4" />
-                      <source src="/Inspection final.MOV" type="video/quicktime" />
-                      Your browser does not support playing this video file.
-                    </video>
+                  {/* Video Playback */}
+                  <div className="pt-2">
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Final Quality Inspection Video</p>
+                    <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-inner bg-black aspect-video max-w-lg">
+                      <video 
+                        controls 
+                        className="w-full h-full object-contain"
+                        poster="/extracted_ppt/ppt/media/image1.jpeg"
+                      >
+                        <source src="/Inspection final.mp4" type="video/mp4" />
+                        <source src="/Inspection final.MOV" type="video/quicktime" />
+                        Your browser does not support playing this video file.
+                      </video>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* STAGE 1 FORM VIEW */}
               {activeStageTab === 1 && (
